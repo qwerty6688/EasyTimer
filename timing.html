@@ -1,0 +1,29 @@
+<input id="input-time" type="text" value="2023-10-2 h:min:sec">
+<button onclick="start()">START</button>
+<p id="hint">
+  hint
+</p>
+
+<audio id="mus" controls="" loop="">
+        <source src="mus.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function start() {
+  //"2023-10-2 12:23:30"
+  time(document.getElementById("input-time").value);
+}
+function time(timedate){
+  var d = new Date(timedate);
+  //yyyy-mm-dd HH:mm:ss
+  document.getElementById("hint").innerHTML = d.getTime() - Date.now();
+    if(d.getTime() - Date.now() < 0){
+      jump();
+    }else{
+      setTimeout(function(){time(timedate)},1000);
+    }
+}
+function jump(){
+  document.getElementById("mus").play();
+}
+</script>
